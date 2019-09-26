@@ -17,18 +17,18 @@ const QuestionModel =  require('./models/question');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(express.static('public/frontend'));
 
 app.get("/", function(request, response){
-    response.sendFile(__dirname + '/public/index.html')
+    response.sendFile(__dirname + '/public/frontend/index.html')
 });
 
 app.get("/hoi-nhanh", function(request, response){
-    response.sendFile(__dirname + '/public/hoi-nhanh.html')
+    response.sendFile(__dirname + '/public/frontend/hoi-nhanh.html')
 });
 
 app.get("/chi-tiet/:questionId", function(request, response){
-    response.sendFile(__dirname + '/public/chi-tiet.html')
+    response.sendFile(__dirname + '/public/frontend/chi-tiet.html')
 });
 
 // add question
