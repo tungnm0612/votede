@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chi tiết câu hỏi</title>
+</head>
+<body>
+    <h1>Question content</h1>
+    <p>Total vote</p>
+    <span id="yes">Vote yes: </span>
+    <span id="no">Vote no: </span>
+    <a href="/"><button >Xem câu hỏi khác</button></a>
+
+    <script>
+        console.log(window.location.search)
+        const searchParam = new URLSearchParams(window.location.search);
+        const questionId = searchParam.get('questionId');
+        console.log(questionId); 
+
+        fetch('https://votede.herokuapp.com/questioninfo/'+questionId, {
+            method: 'GET',
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            console.log(document.querySelector('h1'));
+            document.querySelector('h1').innerText = data.content;
+            document.querySelector('p').innerText = data.yes + data.no + ' vote';
+            // document.querySelector('#yes').innerText = data.yes + 'yes';
+            document.getElementById('yes').innerText = 'Vote yes: ' + data.yes;
+            document.getElementById('no').innerText = 'Vote no: ' + data.no;
+            
+        }).catch(function(err) {
+            console.log("ERROR: ", err);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đáp gọn</title>
+</head>
+<body>
+    <h1>Question content</h1>
+
+    <form id="vote" action="" method="POST">
+        <button type="submit" name="vote" value="no">Sai/Không/Trái</button>
+        <button type="submit" name="vote" value="yes">Đúng/Có/Phải</button>
+    </form>
+    
+    <a id="detail" href="#">
+        <button>Kết quả vote</button>
+    </a>
+    <a href="/">
+        <button type="button">Câu Hỏi khác</button>
+    </a>
+
+    <script> 
+
+        fetch('https://votede.herokuapp.com/randomquestion', {
+            method: 'GET',
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            console.log(document.querySelector('h1'));
+            document.querySelector('h1').innerText = data.content;
+            document.getElementById('detail').href = '/chi-tiet?questionId='+data._id;
+            document.getElementById('vote').action = 'https://votede.herokuapp.com/vote/' + data._id
+            
+        }).catch(function(err) {
+            console.log("ERROR: ", err);
+        });
+
+    </script>
+
+</body>
+</html>
