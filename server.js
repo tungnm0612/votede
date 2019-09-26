@@ -27,7 +27,7 @@ app.get("/hoi-nhanh", function(request, response){
     response.sendFile(__dirname + '/public/frontend/hoi-nhanh.html')
 });
 
-app.get("chi-tiet?questionId="+questionId, function(request, response){
+app.get("/chi-tiet", function(request, response){
     response.sendFile(__dirname + '/public/frontend/chi-tiet.html')
 });
 
