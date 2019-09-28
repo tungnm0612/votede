@@ -1,0 +1,47 @@
+ .hoinhanh{
+     text-align: center;
+     margin-top: 20px;
+ }
+
+ .hoinhanh form{
+     margin-top: 20px;
+ }
+ .hoinhanh button{
+    margin-top: 20px;
+ }
+
+ .trangchu{
+     text-align: center;
+ }
+
+ .trangchu h1{
+     margin-top: 150px;
+ }
+
+ #vote #no{
+     margin-right: 400px;
+ }
+
+ .trangchu button{
+     margin-top: 80px;
+ }
+
+ .chitiet{
+     text-align: center;
+ }
+
+ .chitiet h1{
+     margin-top: 120px;
+ }
+ .chitiet p{
+     margin-top: 60px;
+ } 
+
+ .progress{
+     width: 50%;
+     margin-left: 25%;
+     font-weight: bolder;
+ }
+ .progress #no{
+     color: black;
+ }

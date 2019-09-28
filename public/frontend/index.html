@@ -4,26 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Đáp gọn</title>
 </head>
 <body>
-    <h1>Question content</h1>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Vote đê!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/hoi-nhanh">Hỏi nhanh</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Đáp gọn</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
-    <form id="vote" action="" method="POST">
-        <button type="submit" name="vote" value="no">Sai/Không/Trái</button>
-        <button type="submit" name="vote" value="yes">Đúng/Có/Phải</button>
-    </form>
-    
-    <a id="detail" href="#">
-        <button>Kết quả vote</button>
-    </a>
-    <a href="/">
-        <button type="button">Câu Hỏi khác</button>
-    </a>
+    <div class="trangchu">
+        <h1>Question content</h1>
 
-    <script> 
+        <form id="vote" action="" method="POST">
+            <button class="btn btn-warning" id="no" type="submit" name="vote" value="no"><i class="fa fa-thumbs-o-down" style="font-size:24px"></i> <b>Sai / Không / Trái</b></button>
+            <button class="btn btn-danger" id="yes" type="submit" name="vote" value="yes"><i class="fa fa-thumbs-o-up" style="font-size:24px"></i> <b>Đúng / Có / Phải</b></button>
+        </form>
+        
+        <a id="detail" href="#">
+            <button class="btn btn-primary">Kết quả vote</button>
+        </a>
+        <a href="/">
+            <button class="btn btn-primary" type="button">Câu Hỏi khác</button>
+        </a>
+    </div>
 
-        fetch('https://votede.herokuapp.com/randomquestion', {
+    <script>
+        fetch('http://localhost:6789/randomquestion', {
             method: 'GET',
         }).then(function(response) {
             return response.json();
@@ -32,13 +58,11 @@
             console.log(document.querySelector('h1'));
             document.querySelector('h1').innerText = data.content;
             document.getElementById('detail').href = '/chi-tiet?questionId='+data._id;
-            document.getElementById('vote').action = 'https://votede.herokuapp.com/vote/' + data._id
+            document.getElementById('vote').action = 'http://localhost:6789/vote/' + data._id;
             
         }).catch(function(err) {
             console.log("ERROR: ", err);
         });
-
     </script>
-
 </body>
 </html>

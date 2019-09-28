@@ -4,14 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Chi tiết câu hỏi</title>
 </head>
 <body>
-    <h1>Question content</h1>
-    <p>Total vote</p>
-    <span id="yes">Vote yes: </span>
-    <span id="no">Vote no: </span>
-    <a href="/"><button >Xem câu hỏi khác</button></a>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Vote đê!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/hoi-nhanh">Hỏi nhanh</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Đáp gọn</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="chitiet">
+        <h1>Question content</h1>
+        <b><p>Total vote</p></b>
+        <div class="progress" style="height: 30px">
+            <div id="no" class="progress-bar bg-warning"></div>
+            <div id="yes" class="progress-bar bg-danger" ></div>
+        </div>       
+        <br><br><br>
+        <a href="/"><button class="btn btn-primary btn-lg" >Xem câu hỏi khác</button></a>
+    </div>
 
     <script>
         console.log(window.location.search)
@@ -19,7 +48,7 @@
         const questionId = searchParam.get('questionId');
         console.log(questionId); 
 
-        fetch('https://votede.herokuapp.com/questioninfo/'+questionId, {
+        fetch('http://localhost:6789/questioninfo/'+questionId, {
             method: 'GET',
         }).then(function(response) {
             return response.json();
@@ -29,8 +58,10 @@
             document.querySelector('h1').innerText = data.content;
             document.querySelector('p').innerText = data.yes + data.no + ' vote';
             // document.querySelector('#yes').innerText = data.yes + 'yes';
-            document.getElementById('yes').innerText = 'Vote yes: ' + data.yes;
-            document.getElementById('no').innerText = 'Vote no: ' + data.no;
+            document.getElementById('no').innerText = 'No: ' + ((data.no/(data.yes+data.no))*100).toFixed(2) + '%';
+            document.getElementById('yes').innerText = 'Yes: ' + ((data.yes/(data.yes+data.no))*100).toFixed(2) + '%';
+            document.getElementById('yes').style.width = (data.yes/(data.yes+data.no))*100 + '%';
+            document.getElementById('no').style.width = (data.no/(data.yes+data.no))*100 + '%';
             
         }).catch(function(err) {
             console.log("ERROR: ", err);
