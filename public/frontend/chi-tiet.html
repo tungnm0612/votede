@@ -48,7 +48,7 @@
         const questionId = searchParam.get('questionId');
         console.log(questionId); 
 
-        fetch('http://localhost:6789/questioninfo/'+questionId, {
+        fetch('https://votede.herokuapp.com/questioninfo/'+questionId, {
             method: 'GET',
         }).then(function(response) {
             return response.json();
